@@ -1,21 +1,16 @@
-# .-------------------------------------------------------------------------.
-# |  __   __ _   _  ____    _    _   _ ____  _   _     _____  ____          |
-# |  \ \ / /| | | |/ ___|  / \  | \ | / ___|| | | |   | ____||  _ \         |
-# |   \ V / | | | | |  _  / _ \ |  \| \___ \| |_| |   |  _|  | | | |        |
-# |    | |  | |_| | |_| |/ ___ \| |\  |___) |  _  |   | |___ | |_| |        |
-# |    |_|   \___/ \____/_/   \_\_| \_|____/|_| |_|   |_____||____/         |
-# |                                                                         |
-# |  The "I probably broke something" Edition. Proceed with caution.        |
-# '-------------------------------------------------------------------------'
-#
-# My personal customizations for CachyOS. 
-# Optimized for speed, aesthetics, and minimal sanity.
-#
-set -g default-terminal "xterm-256color"
-set -ga terminal-overrides ",xterm-256color:Tc"
-
-# : << 'EOF'
-# --- Original Foundation ---
+# # .-------------------------------------------------------------------------.
+# # |  __   __ _   _  ____    _    _   _ ____  _   _     _____  ____          |
+# # |  \ \ / /| | | |/ ___|  / \  | \ | / ___|| | | |   | ____||  _ \         |
+# # |   \ V / | | | | |  _  / _ \ |  \| \___ \| |_| |   |  _|  | | | |        |
+# # |    | |  | |_| | |_| |/ ___ \| |\  |___) |  _  |   | |___ | |_| |        |
+# # |    |_|   \___/ \____/_/   \_\_| \_|____/|_| |_|   |_____||____/         |
+# # |                                                                         |
+# # |  The "I probably broke something" Edition. Proceed with caution.        |
+# # '-------------------------------------------------------------------------'
+# #
+# # My personal customizations for CachyOS. 
+# # Optimized for speed, aesthetics, and minimal sanity.
+# #
 # Oh my tmux!
 # 💛🩷💙🖤❤️🤍
 # https://github.com/gpakosz/.tmux
@@ -547,3 +542,5 @@ set -g @plugin 'samoshkin/tmux-plugin-sysstat'
 set -g @sysstat_cpu_view_tmpl 'CPU: #{cpu.pused}'
 set -g @sysstat_mem_view_tmpl 'MEM: #{mem.pused}'
 
+set -g default-terminal "xterm-256color"
+set -ga terminal-overrides ",xterm-256color:Tc"

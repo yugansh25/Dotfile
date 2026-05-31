@@ -183,23 +183,26 @@ stow_package() {
     stow_output=$(stow -t "$HOME" -nv "$pkg" 2>&1 || true)
     
     if echo "$stow_output" | grep -q "existing target"; then
+        # The robust way to catch multiple conflict lines and extract the path
         local conflicts
-        conflicts=$(echo "$stow_output" | grep "existing target" | sed -E 's/.*existing target ([^ ]+).*/\1/')
+        conflicts=$(echo "$stow_output" | grep "existing target" | awk -F': ' '{print $NF}')
 
         if [ "$DRY_RUN" = true ]; then
             echo -e "${YELLOW}[ACTION] Would BACKUP existing files to avoid conflicts:${NC}"
             echo "$conflicts" | while read -r line; do
-                echo -e "  - ~/$line  -->  $BACKUP_DIR/$line"
+                [ -n "$line" ] && echo -e "  - ~/$line  -->  $BACKUP_DIR/$line"
             done
         else
             echo -e "${YELLOW}[ACTION] Backing up existing files to $BACKUP_DIR...${NC}"
             mkdir -p "$BACKUP_DIR"
             echo "$conflicts" | while read -r line; do
-                local target="$HOME/$line"
-                if [ -e "$target" ] || [ -L "$target" ]; then
-                    echo "  Moving ~/$line"
-                    mkdir -p "$BACKUP_DIR/$(dirname "$line")"
-                    mv "$target" "$BACKUP_DIR/$line"
+                if [ -n "$line" ]; then
+                    local target="$HOME/$line"
+                    if [ -e "$target" ] || [ -L "$target" ]; then
+                        echo "  Moving ~/$line"
+                        mkdir -p "$BACKUP_DIR/$(dirname "$line")"
+                        mv "$target" "$BACKUP_DIR/$line"
+                    fi
                 fi
             done
         fi
