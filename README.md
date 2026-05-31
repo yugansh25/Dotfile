@@ -1,92 +1,73 @@
 # Yugansh's Dotfiles 🛠️
 
-Welcome to my dotfiles. This is basically the digital glue holding my setup together.
+My personal configuration files, optimized for speed, aesthetics, and sanity on Arch Linux.
+
+These configurations are heavily derived from the excellent defaults provided by [CachyOS](https://cachyos.org/). I've customized them to fit my personal workflow, adding custom widgets, specific keybindings, and a unified theme.
 
 ---
 
-## 🏔️ The Foundation: CachyOS
+## ✨ Features
 
-I use **CachyOS** and most of the configs here are based on their great defaults. Big thanks to the CachyOS team for giving me such a fast and solid baseline. I just added some personal flair and likely a few bugs on top of their work.
-
----
-
-## What's in here? 📦
-
-**🐟 Fish (CachyOS flavor)**
-CachyOS gives a great start but I added my own overrides and aliases to fit my workflow.
-
-**🖥️ Tmux**
-I use Oh-My-Tmux with custom sysstat widgets and thin battery bars. It helps me see when my RAM is struggling.
-
-**👻 Ghostty**
-Terminal speed is everything.
-
-**🐚 Bash and Zsh**
-The classics for whenever I need them.
-
-**⌨️ Alacritty**
-My backup terminal.
-
----
-
-## ⚠️ Security Note
-
-I removed all my sensitive API keys like OpenAI from these files. If you fork this repo make sure to put your keys in a local file that git doesn't track.
+*   **🐟 Fish:** CachyOS flavor, customized with personal overrides and aliases.
+*   **🖥️ Tmux:** Powered by [Oh-My-Tmux](https://github.com/gpakosz/.tmux), featuring custom sysstat widgets and minimal battery indicators.
+*   **👻 Ghostty:** My primary terminal emulator, configured for maximum speed.
+*   **📝 Neovim / Vim:** Fast, functional editor configurations.
+*   **🐚 Bash & Zsh:** The classics, kept around as reliable fallbacks.
 
 ---
 
 ## 🚀 Installation
 
-This repo is built for **GNU Stow**. I wrote a safe script to handle everything for you.
+This repository uses [GNU Stow](https://www.gnu.org/software/stow/) to manage symlinks cleanly. I have included an automated installer script.
 
-**1. Clone the repo**
-\`\`\`bash
+### 1. Clone the Repository
+
+```bash
 git clone https://github.com/yugansh25/Dotfile.git ~/.dotfiles
 cd ~/.dotfiles
-\`\`\`
+```
 
-**2. Test it (Safety First)**
-Check exactly what will happen without touching your files.
-\`\`\`bash
+### 2. Dry Run (Recommended)
+
+Simulate the installation without making any changes to your filesystem:
+
+```bash
 ./install.sh --dry-run
-\`\`\`
+```
 
-**3. Install**
-Apply the symlinks. The script will automatically backup any existing configs it finds.
-\`\`\`bash
+### 3. Install
+
+The script will automatically detect existing configurations and back them up to `~/dotfiles_old_[timestamp]` before creating the new symlinks.
+
+```bash
 ./install.sh
-\`\`\`
+```
 
-**4. Undo (The Panic Button)**
-If you change your mind just run the restore command to put your original files back.
-\`\`\`bash
+---
+
+## 🔄 Restoration
+
+If you need to revert to your original configurations, you can use the built-in restore function. This removes the symlinks and moves your backed-up files back into place.
+
+```bash
 ./install.sh --restore
-\`\`\`
+```
+
+*(You can also use `--restore --dry-run` to preview the restoration process).*
 
 ---
 
-## 🛠️ Manual Installation
+## 🛡️ Security Note
 
-You can also stow things one by one if you prefer. Just make sure you are in the dotfiles directory.
-
-\`\`\`bash
-stow alacritty
-stow bash
-stow fish
-stow ghostty
-stow tmux
-stow vim
-stow zsh
-\`\`\`
+I keep my sensitive API keys (like OpenAI) out of this public repository. If you fork this, ensure you place your secrets in a local, git-ignored file (e.g., `~/.config/fish/conf.d/secrets.fish`).
 
 ---
 
-## 📜 Credits
+## 📜 Credits and Inspirations
 
-**CachyOS Team** for the incredible baseline.
+This setup wouldn't be possible without the work of others:
 
-**Gregory Pakosz** for the Oh-My-Tmux foundation.
-
-**Derek Taylor (DistroTube)** for the inspiration and shell snippets.
-
-**Alexey Samoshkin** for the tmux-plugin-sysstat.
+*   The **CachyOS Team** for the incredible baseline and OS.
+*   **Gregory Pakosz** for the robust Oh-My-Tmux framework.
+*   **Derek Taylor (DistroTube)** for shell inspiration and snippets.
+*   **Alexey Samoshkin** for `tmux-plugin-sysstat`.

@@ -8,7 +8,7 @@
 # # |  The "I probably broke something" Edition. Proceed with caution.        |
 # # '-------------------------------------------------------------------------'
 # #
-# # My personal customizations for CachyOS. 
+# # My personal customizations for CachyOS.
 # # Optimized for speed, aesthetics, and minimal sanity.
 # #
 source /usr/share/cachyos-fish-config/cachyos-config.fish
