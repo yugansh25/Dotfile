@@ -1,0 +1,396 @@
+" .-------------------------------------------------------------------------.
+" |  __   __ _   _  ____    _    _   _ ____  _   _     _____  ____          |
+" |  \ \ / /| | | |/ ___|  / \  | \ | / ___|| | | |   | ____||  _ \         |
+" |   \ V / | | | | |  _  / _ \ |  \| \___ \| |_| |   |  _|  | | | |        |
+" |    | |  | |_| | |_| |/ ___ \| |\  |___) |  _  |   | |___ | |_| |        |
+" |    |_|   \___/ \____/_/   \_\_| \_|____/|_| |_|   |_____||____/         |
+" |                                                                         |
+" |  The "I probably broke something" Edition. Proceed with caution.        |
+" '-------------------------------------------------------------------------'
+"
+" My personal customizations for CachyOS. 
+" Optimized for speed, aesthetics, and minimal sanity.
+"
+" ========== Vim Basic Settings ============="
+
+" Pathogen settings.
+filetype off
+"call pathogen#runtime_append_all_bundles()
+"call pathogen#infect()
+call plug#begin('~/.vim/plugged')
+"Helptags
+filetype plugin indent on
+
+
+"==================== Vim Plug manager configurations ======================
+" List of plugins 
+" ==========================================================================
+"
+" Core plugins.
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'https://github.com/mileszs/ack.vim.git'
+Plug 'scrooloose/nerdtree', { 'on': 'NERDTreeToggle' }
+"Plug 'https://github.com/scrooloose/syntastic.git'
+Plug 'https://github.com/w0rp/ale.git'
+
+" Language plugins.
+Plug 'https://github.com/fatih/vim-go.git', { 'for': 'go'}
+Plug 'https://github.com/rust-lang/rust.vim.git', { 'for': 'rust' }
+Plug 'https://github.com/chase/vim-ansible-yaml.git'
+
+" Vim theme related.
+Plug 'altercation/vim-colors-solarized'
+Plug 'bling/vim-airline'
+"Plug 'fholgado/minibufexpl.vim' " Short-form supported.
+"Plug 'https://github.com/scrooloose/nerdcommenter.git'
+"Plug 'https://github.com/klen/rope-vim.git', { 'for': 'python'}
+"Plug 'https://github.com/majutsushi/tagbar.git'
+"Plug 'https://github.com/davidhalter/jedi-vim.git'
+"Plug 'https://github.com/wincent/Command-T'
+"Plug 'https://github.com/SirVer/ultisnips.git'
+
+call plug#end()
+
+" ==============================================================
+
+" Make vim incompatbile to vi.
+set nocompatible
+set modelines=0
+
+"TAB settings.
+set tabstop=4
+set shiftwidth=4
+set softtabstop=4
+set expandtab
+
+" More Common Settings.
+set encoding=utf-8
+set scrolloff=3
+set autoindent
+set showmode
+set showcmd
+set hidden
+set wildmenu
+set wildmode=list:longest
+"set visualbell
+syntax on
+
+"set cursorline
+set ttyfast
+set ruler
+set backspace=indent,eol,start
+set laststatus=2
+
+"set relativenumber
+set number
+set norelativenumber
+
+"set undofile
+set shell=/bin/bash
+set lazyredraw
+set matchtime=3
+
+" Window navigation.
+:nmap <silent> <C-h> :wincmd h<CR>
+:nmap <silent> <C-j> :wincmd j<CR>
+:nmap <silent> <C-k> :wincmd k<CR>
+:nmap <silent> <C-l> :wincmd l<CR>
+
+"Changing Leader Key
+let mapleader = ","
+""""
+" Set title to window
+set title 
+" Dictionary path, from which the words are being looked up.
+set dictionary=/usr/share/dict/words
+
+" Make pasting done without any indentation break."
+set pastetoggle=<F3>
+
+" Make Vim able to edit corntab fiels again.
+set backupskip=/tmp/*,/private/tmp/*"
+
+" Enable Mouse
+set mouse=a
+"set smartindent
+
+"Settings for Searching and Moving
+nnoremap / /\v
+vnoremap / /\v
+set ignorecase
+set smartcase
+set gdefault
+set incsearch
+set showmatch
+set hlsearch
+nnoremap <leader><space> :noh<cr>
+"nnoremap <tab> %
+"vnoremap <tab> %
+
+
+" Make Vim to handle long lines nicely.
+set wrap
+set textwidth=80
+set formatoptions=qrn1
+set colorcolumn=80
+
+
+" To  show special characters in Vim
+"set list
+set listchars=tab:▸\ ,eol:¬
+
+" Naviagations using keys up/down/left/right
+" Disabling default keys to learn the hjkl
+nnoremap <up> <nop>
+nnoremap <down> <nop>
+nnoremap <left> <nop>
+nnoremap <right> <nop>
+"inoremap <up> <nop>
+"inoremap <down> <nop>
+"inoremap <left> <nop>
+"inoremap <right> <nop>
+"nnoremap j gj
+"nnoremap k gk
+
+" Rope settings."
+inoremap <leader>j <ESC>:RopeGotoDefinition<cr>
+
+" Get Rid of stupid Goddamned help keys
+inoremap <F1> <ESC>
+nnoremap <F1> <ESC>
+vnoremap <F1> <ESC>
+
+" Map : to ; also in command mode.
+"nnoremap ; :
+
+" Set vim to save the file on focus out.
+au FocusLost * :wa
+
+" Adding More Shorcuts keys using leader kye.
+" Leader Kye provide separate namespace for specific commands.
+",W Command to remove white space from a file.
+""nnoremap <leader>W :%s/\s\+$//<cr>:let @/=''<CR>
+
+" ,ft Fold tag, helpful for HTML editing.
+nnoremap <leader>ft vatzf
+
+" ,q Re-hardwrap Paragraph
+nnoremap <leader>q gqip
+
+" ,v Select just pasted text.
+nnoremap <leader>v V`]
+
+" ,ev Shortcut to edit .vimrc file on the fly on a vertical window.
+nnoremap <leader>ev <C-w><C-v><C-l>:e $MYVIMRC<cr>
+
+" jj For Qicker Escaping between normal and editing mode.
+"inoremap jj <ESC>
+
+
+" Working with split screen nicely
+" Resize Split When the window is resized"
+au VimResized * :wincmd =
+
+
+" Wildmenu completion "
+set wildmenu
+set wildmode=list:longest
+set wildignore+=.hg,.git,.svn " Version Controls"
+set wildignore+=*.aux,*.out,*.toc "Latex Indermediate files"
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg "Binary Imgs"
+set wildignore+=*.o,*.obj,*.exe,*.dll,*.manifest "Compiled Object files"
+set wildignore+=*.spl "Compiled speolling world list"
+set wildignore+=*.sw? "Vim swap files"
+set wildignore+=*.DS_Store "OSX SHIT"
+set wildignore+=*.luac "Lua byte code"
+set wildignore+=migrations "Django migrations"
+set wildignore+=*.pyc "Python Object codes"
+set wildignore+=*.orig "Merge resolution files"
+set wildignore+=node_modules/** "Exclude node modules.
+set wildignore+=ENV "Exclude python virtual environments.
+set wildignore+=build/** "Any build folders.
+
+" Custom project specific ignores
+set wildignore+=paper-web/**
+set wildignore+=insight/**
+set wildignore+=static/**
+
+"Make Sure that Vim returns to the same line when we reopen a file"
+augroup line_return
+    au!
+    au BufReadPost *
+        \ if line("'\"") > 0 && line("'\"") <= line("$") |
+        \ execute 'normal! g`"zvzz' |
+        \ endif
+augroup END
+
+nnoremap g; g;zz
+
+" =========== END Basic Vim Settings ===========
+
+
+" >>> Special binding rules <<<
+
+" > Folding the leftcolumn toggle. < "
+nnoremap <leader>f :call FoldColumnToggle()<cr>
+
+" direct mapping may disable other mappings done on this keybinding.
+"imap <leader>f :call FoldColumnToggle()<cr>
+
+function! FoldColumnToggle()
+    if &foldcolumn
+        setlocal foldcolumn=0
+    else
+        setlocal foldcolumn=4
+    endif
+endfunction
+
+" > Quick Fix Toggle to see the quickfix window < "
+nnoremap <leader>q :call QuickFixToggle()<cr>
+
+" Global variable keeping track of the state of the quick fix window.
+let g:quickfix_is_open = 0
+
+function! QuickFixToggle()
+    if g:quickfix_is_open
+        cclose
+        let g:quickfix_is_open = 0
+        execute g:quickfix_return_to_window . "wincmd w"
+    else
+        let g:quickfix_return_to_window = winnr()
+        copen
+        let g:quickfix_is_open = 1
+    endif
+endfunction
+
+" > Spell checker Toggler <
+nnoremap <leader>c :call SpellChecker()<cr>
+
+let g:spell_checker_is_active = 0
+function! SpellChecker()
+    if g:spell_checker_is_active
+        setlocal spell spelllang=
+        let g:spell_checker_is_active = 0
+    else
+        setlocal spell spelllang=en_us
+        let g:spell_checker_is_active = 1
+    endif
+endfunction
+
+" >>> END Special binding rules <<<
+
+" =========== Gvim Settings =============
+
+" Removing scrollbars
+if has("gui_running")
+    set guitablabel=%-0.12t%M
+    set guioptions-=T
+    set guioptions-=r
+    set guioptions-=L
+    set guioptions+=a
+    set guioptions-=m
+    set listchars=tab:▸\ ,eol:¬         " Invisibles using the Textmate style
+
+    set guifont=Cousine\ 10
+else
+    set t_Co=256
+endif
+
+"set background=dark
+"colorscheme badwolf
+
+let g:solarized_termcolors=256
+
+syntax enable
+set background=dark
+colorscheme solarized
+
+
+
+" Source the vimrc file after saving it
+"autocmd bufwritepost .vimrc source ~/.vimrc
+
+" ========== END Gvim Settings ==========
+
+
+" ========== Plugin Settings =========="
+
+" Mapping to NERDTree
+nnoremap <C-n> :NERDTreeToggle<cr>
+let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$']
+
+" Mini Buffer some settigns."
+let g:miniBufExplMapWindowNavVim = 1
+let g:miniBufExplMapWindowNavArrows = 1
+let g:miniBufExplMapCTabSwitchBufs = 1
+let g:miniBufExplModSelTarget = 1
+
+" Tab color settings to make it more visible.
+hi MBEChanged ctermfg=white
+hi MBENormal ctermfg=white
+
+" Rope Plugin settings
+" imap <leader>j <ESC>:RopeGotoDefinition<cr>
+nmap <leader>j <ESC>:RopeGotoDefinition<cr>
+
+" Tagbar key bindings."
+nmap <leader>l <ESC>:TagbarToggle<cr>
+imap <leader>l <ESC>:TagbarToggle<cr>i
+
+" Snipmate remap settings. It's binding overwritten standard
+" bindings.
+" Snipmate using bellow VIM's default keys, just unmap it.
+" autocmd VimEnter * unmap! <C-i>
+
+
+" Add the virtualenv's site-packages to vim path
+"py << EOF
+"import os.path
+"import sys
+"import vim
+"if 'VIRTUAL_ENV' in os.environ:
+"    project_base_dir = os.environ['VIRTUAL_ENV']
+"    sys.path.insert(0, project_base_dir)
+"    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+"    with open(activate_this, 'r') as f:
+"        exec(f.read(), dict(__file__=activate_this))
+"EOF
+
+" make YCM compatible with UltiSnips
+" let g:ycm_key_list_select_completion = ['<C-n>', '<Down>']
+" let g:ycm_key_list_previous_completion = ['<C-p>', '<Up>']
+" let g:SuperTabDefaultCompletionType = '<C-n>'
+"  
+" better key bindings for UltiSnipsExpandTrigger
+"let g:UltiSnipsUsePythonVersion = 2
+"let g:UltiSnipsExpandTrigger="<tab>"
+"let g:UltiSnipsJumpForwardTrigger="<c-j>"
+"let g:UltiSnipsJumpBackwardTrigger="<c-k>"
+
+
+" ACK using ag as the searcher.
+let g:ackprg = 'ag --nogroup --nocolor --column'
+
+" FZF plugin  mapping settings.
+nmap ; :Buffers<CR>
+nmap <Leader>t :Files<CR>
+nmap <Leader>r :Tags<CR>
+
+"" ALE
+let g:ale_statusline_format = ['☀️️ %d', '🕯️ %d', '']
+let g:ale_fix_on_save = 1
+let g:ale_lint_on_text_changed = 'never'
+let g:ale_lint_on_insert_leave = 0
+
+let g:ale_fixers = { 'javascript': ['prettier', 'eslint'] }
+let g:ale_linters = { 'javascript': ['eslint'] }
+
+let g:ale_javascript_prettier_use_local_config = 1
+"let g:ale_javascript_eslint_executable = '/Users/haridas/.nvm/versions/node/v6.11.5/bin/eslint'
+
+" =========== END Plugin Settings =========="
+
+" Automatically remove the trailing white space on a given file. helps to keep
+" clean git history.
+autocmd BufWritePre *.py,*cpp,*.c %s/\ \+$//e

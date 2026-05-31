@@ -2,7 +2,7 @@
 # +-+-+-+-+-+-+-+ +-+-+-+-+-+-+
 # |Y|u|g|a|n|s|h| |C|h|a|w|d|a|
 # +-+-+-+-+-+-+-+ +-+-+-+-+-+-+
-# Author: Yugansh Kumar
+# Author: Yugansh Chawda
 # Linkedin: www.linkedin.com/in/yugansh-chawda
 # Email: yuganshchawda25@hotmail.com
 # Impired from Derek Taylor (DistroTube).
