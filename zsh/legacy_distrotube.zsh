@@ -241,10 +241,10 @@ alias tofish="sudo chsh $USER -s /bin/fish && echo 'Now log out.'"
 alias config="/usr/bin/git --git-dir=$HOME/dotfiles --work-tree=$HOME"
 
 # termbin
-alias tb="nc termbin.com 9999"
+# alias tb="nc termbin.com 9999"
 
 # the terminal rickroll
-alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
+# alias rr='curl -s -L https://raw.githubusercontent.com/keroserene/rickrollrc/master/roll.sh | bash'
 
 # Unlock LBRY tips
 alias tips='lbrynet txo spend --type=support --is_not_my_input --blocking'
@@ -258,7 +258,7 @@ alias dtosbackup='cp -Rf /etc/dtos ~/dtos-backup-$(date +%Y.%m.%d-%H.%M.%S)'
 ### RANDOM COLOR SCRIPT ###
 # Get this script from my GitLab: gitlab.com/dwt1/shell-color-scripts
 # Or install it from the Arch User Repository: shell-color-scripts
-colorscript random
+if command -v colorscript >/dev/null; colorscript random; fi
 
 ### BASH INSULTER (works in zsh though) ###
 if [ -f /etc/bash.command-not-found ]; then
@@ -268,7 +268,7 @@ fi
 prompt off
 
 ### SETTING THE STARSHIP PROMPT ###
-eval "$(starship init zsh)"
+if command -v starship >/dev/null; eval "$(starship init zsh)"; fi
 
 # auto completion from https://github.com/zsh-users/zsh-autosuggestions
 source ~/.zsh/zsh-autosuggestions/zsh-autosuggestions.zsh

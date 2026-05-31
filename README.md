@@ -1,6 +1,6 @@
 # Yugansh's Dotfiles 🛠️
 
-My personal configuration files, optimized for speed, aesthetics, and sanity on Arch Linux.
+My personal configuration files, optimized for speed, aesthetics, and sanity.
 
 These configurations are heavily derived from the excellent defaults provided by [CachyOS](https://cachyos.org/). I've customized them to fit my personal workflow, adding custom widgets, specific keybindings, and a unified theme.
 
@@ -8,11 +8,13 @@ These configurations are heavily derived from the excellent defaults provided by
 
 ## ✨ Features
 
-*   **🐟 Fish:** CachyOS flavor, customized with personal overrides and aliases.
+*   **🐟 Fish:** CachyOS flavor with smart overrides. Now with `bye` for smooth tmux exits.
 *   **🖥️ Tmux:** Powered by [Oh-My-Tmux](https://github.com/gpakosz/.tmux), featuring custom sysstat widgets and minimal battery indicators.
 *   **👻 Ghostty:** My primary terminal emulator, configured for maximum speed.
 *   **📝 Neovim / Vim:** Fast, functional editor configurations.
 *   **🐚 Bash & Zsh:** The classics, kept around as reliable fallbacks.
+*   **🛡️ Hardened:** Automatic permission management for sensitive configs (secrets.fish).
+*   **🚀 Dynamic:** Automatic package detection. Add a folder, run the script, profit.
 
 ---
 
@@ -37,7 +39,7 @@ Simulate the installation without making any changes to your filesystem:
 
 ### 3. Install
 
-The script will automatically detect existing configurations and back them up to `~/dotfiles_old_[timestamp]` before creating the new symlinks.
+The script will automatically detect existing configurations and back them up as `.bak` files in place before creating the new symlinks.
 
 ```bash
 ./install.sh
@@ -47,25 +49,21 @@ The script will automatically detect existing configurations and back them up to
 
 ## 🔄 Restoration
 
-If you need to revert to your original configurations, you can use the built-in restore function. This removes the symlinks and moves your backed-up files back into place.
+If you need to revert to your original configurations, use the built-in restore function. This removes the symlinks and moves your `.bak` files back into place.
 
 ```bash
 ./install.sh --restore
 ```
 
-*(You can also use `--restore --dry-run` to preview the restoration process).*
-
 ---
 
 ## 🛡️ Security Note
 
-I keep my sensitive API keys (like OpenAI) out of this public repository. If you fork this, ensure you place your secrets in a local, git-ignored file (e.g., `~/.config/fish/conf.d/secrets.fish`).
+I keep my sensitive API keys (like OpenAI) out of this public repository. The installer automatically enforces `600` permissions on `~/.config/fish/conf.d/secrets.fish` for your safety.
 
 ---
 
 ## 📜 Credits and Inspirations
-
-This setup wouldn't be possible without the work of others:
 
 *   The **CachyOS Team** for the incredible baseline and OS.
 *   **Gregory Pakosz** for the robust Oh-My-Tmux framework.
